@@ -1,0 +1,12 @@
+Started a workshop with Apache Kafka as part of my Data Engineering upskill/retooling.
+
+Inspired by FlowForge Lab: https://www.youtube.com/watch?v=Lb5UDslK6ZE
+
+Download Kafka:
+https://archive.apache.org/dist/kafka/4.4.0/kafka_2.13-4.4.0.tgz
+
+> pip install confluent-kafka==2.16.1 pyspark==4.3.0
+
+> python -c "import confluent_kafka, pyspark; print(confluent_kafka.version(), pyspark.__version__)"
+2.16.1 4.3.0
+
