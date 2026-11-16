@@ -10,3 +10,24 @@ https://archive.apache.org/dist/kafka/4.4.0/kafka_2.13-4.4.0.tgz
 > python -c "import confluent_kafka, pyspark; print(confluent_kafka.version(), pyspark.__version__)"
 2.16.1 4.3.0
 
+Samples:
+/opt/kafka/bin $ export PATH="$PWD:$PATH"
+/opt/kafka/bin $ echo $PATH
+/opt/kafka/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+/opt/kafka/bin $ export BS=localhost:9092
+
+Get a random cluster Id:
+/opt/kafka/bin $ kafka-storage.sh random-uuid
+yNIBpHnPQJap0V5IAuPpKg
+
+Check status:
+/opt/kafka/bin $ kafka-metadata-quorum.sh --bootstrap-server $BS describe --status
+ClusterId:              5L6g3nShT-eMCtK--X86sw
+LeaderId:               1
+LeaderEpoch:            1
+HighWatermark:          2527
+MaxFollowerLag:         0
+MaxFollowerLagTimeMs:   0
+CurrentVoters:          [{"id": 1, "endpoints": ["CONTROLLER://localhost:9093"]}]
+CurrentObservers:       []
+
