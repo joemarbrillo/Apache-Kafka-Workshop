@@ -38,6 +38,7 @@ Requires pip install ipykernel
 Every time you run docker exec, it starts a fresh shell without your previous export variables.
 > set PATH="$PWD/kafka/bin:$PATH"
 > set "BS=localhost:9092"
+Or, export for command terminal use
 
 
 ## Open the broker shell terminal:
@@ -85,5 +86,9 @@ hello:0:3
 
 
 ## Debugging and testing:
+
+
+## Create a topic with 3 partitions
+> kafka-topics.sh --bootstrap-server $BS --create --topic keys-demo --partitions 3
 
 

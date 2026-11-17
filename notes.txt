@@ -1,6 +1,8 @@
 Started a workshop with Apache Kafka as part of my Data Engineering upskill/retooling.
 
+
 Inspired by FlowForge Lab: https://www.youtube.com/watch?v=Lb5UDslK6ZE
+
 
 Download Kafka:
 https://archive.apache.org/dist/kafka/4.4.0/kafka_2.13-4.4.0.tgz
@@ -10,15 +12,18 @@ https://archive.apache.org/dist/kafka/4.4.0/kafka_2.13-4.4.0.tgz
 > python -c "import confluent_kafka, pyspark; print(confluent_kafka.version(), pyspark.__version__)"
 2.16.1 4.3.0
 
+
 Samples:
 /opt/kafka/bin $ export PATH="$PWD:$PATH"
 /opt/kafka/bin $ echo $PATH
 /opt/kafka/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 /opt/kafka/bin $ export BS=localhost:9092
 
+
 Get a random cluster Id:
 /opt/kafka/bin $ kafka-storage.sh random-uuid
 yNIBpHnPQJap0V5IAuPpKg
+
 
 Check status:
 /opt/kafka/bin $ kafka-metadata-quorum.sh --bootstrap-server $BS describe --status
@@ -31,3 +36,36 @@ MaxFollowerLagTimeMs:   0
 CurrentVoters:          [{"id": 1, "endpoints": ["CONTROLLER://localhost:9093"]}]
 CurrentObservers:       []
 
+
+Get list:
+/opt/kafka/bin> kafka-consumer-groups.sh --bootstrap-server $BS --list
+
+
+Describe a group:
+/opt/kafka/bin $ kafka-consumer-groups.sh --bootstrap-server $BS --describe --group order-counter
+
+Consumer group 'order-counter' has no active members.
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+order-counter   orders          0          3               3               0               -               -               -
+order-counter   orders          2          1               1               0               -               -               -
+
+
+Reset offsets:
+> kafka-consumer-groups.sh --bootstrap-server $BS --group order-counter --reset-offsets --to-earliest --topic orders --dry-run
+/opt/kafka/bin $ kafka-consumer-groups.sh --bootstrap-server $BS --group order-counter --reset-offsets --to-earliest --topic orders --execute
+
+
+Config:
+kafka-configs.sh --bootstrap-server $BS --alter --entity-type topics --entity-name orders --add-config retention.ms=1209600000
+Completed updating config for topic orders.
+
+
+Check the config:
+kafka-configs.sh --bootstrap-server $BS --describe --entity-type topics --entity-name orders
+Dynamic configs for topic orders are:
+  retention.ms=1209600000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:retention.ms=1209600000}
+
+
+Create a topic:
+kafka-topics.sh --bootstrap-server $BS --create --topic orders-dlq --partitions 1

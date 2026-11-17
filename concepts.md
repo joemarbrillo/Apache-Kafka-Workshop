@@ -10,3 +10,12 @@
 Bonus:
 KRaft - Kafka stores its own metadate in a Kafka log. No ZooKeeper since Kafka 4.0.
 
+Hot key - key with far more events than the other, that could overload other partitions.
+
+linger.ms - improves throughput waits for few ms to process bigger workloads
+
+enable.idempotence - prevent duplication
+
+
+--dry-run: shows the neew offsets
+
