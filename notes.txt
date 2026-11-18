@@ -69,3 +69,14 @@ Dynamic configs for topic orders are:
 
 Create a topic:
 kafka-topics.sh --bootstrap-server $BS --create --topic orders-dlq --partitions 1
+
+
+Create a new topic:
+kafka > kafka-topics.sh --bootstrap-server $BS --create --topic orders-enriched --partitions 3
+Created topic orders-enriched.
+
+
+Checkpoint:
+
+
+To resume: 1:57:00

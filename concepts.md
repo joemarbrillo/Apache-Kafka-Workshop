@@ -19,3 +19,28 @@ enable.idempotence - prevent duplication
 
 --dry-run: shows the neew offsets
 
+What's a poison-pill?
+An event that crashes the consumer every time, so the consumer can never get passed.
+
+Why do we keep the original key-value?
+So nothing is lost, it can be replayed.
+
+Why flush the dead-letter producer before committing?
+If we commit first and then crash, the bad event will be neither processed or saved.
+
+Checkpoints - describes one query's progress.
+
+Why partition the lake by date - can skip all day's folder.
+
+Watermark: 
+
+Kafka - a distributed, durable, append-only event log, producers write events to topics. Consumers read at their own pace, until retention removes them.
+
+Kafka vs Traditional message queue. A queue usually deletes once it is consumed, but Kafka retains it until it's retention policy is met.
+
+How Kafka guatantees ordering. Only within a partition, order with the same key, always go to the same partition.
+
+What's a consumer group? Consumers sharing a group ids split the partition a topic within them.
+
+What happens during a rebalance?
+
