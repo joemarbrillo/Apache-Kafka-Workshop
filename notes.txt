@@ -77,6 +77,3 @@ Created topic orders-enriched.
 
 
 Checkpoint:
-
-
-To resume: 1:57:00
